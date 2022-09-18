@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blog of the site</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="container mt-5 mb-5">
+    <h1>Add your post</h1>
+    <form action="/blog/post" method="post">
+        <input type="text" name="title" placeholder="Enter the name of post" class="form-control"><br>
+        <input type="text" name="topic" placeholder="Enter the topic" class="form-control"><br>
+        <textarea name="fullText" placeholder="Enter the text" class="form-control"></textarea><br>
+        <button type="submit" class="btn btn-success">Add post</button>
+    </form>
+</div>
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+<html/>
