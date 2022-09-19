@@ -1,13 +1,10 @@
-package ru.boris.ex_website_api.controller.rest;
+package ru.boris.ex_website_api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.boris.ex_website_api.entity.Post;
 
 import ru.boris.ex_website_api.repository.PostRepository;
@@ -50,7 +47,7 @@ public class BlogPageController {
     }
 
     @GetMapping("/blog/{id}")
-    public String blogDetail(@PathVariable(value = "id") int id, Model model){
+    public String blogDetail(@PathVariable(value = "id") int id, Model model) {
         if (!postRepository.existsById(id)) {
             return "redirect:/blog";
         }
@@ -62,7 +59,7 @@ public class BlogPageController {
     }
 
     @GetMapping("blog/{id}/edit")
-    public String blogEdit(@PathVariable(value = "id") int id, Model model){
+    public String blogEdit(@PathVariable(value = "id") int id, Model model) {
         if (!postRepository.existsById(id)) {
             return "redirect:/blog";
         }
@@ -75,7 +72,7 @@ public class BlogPageController {
 
     @PostMapping("blog/{id}/edit")
     public String postBlogUpdate(@PathVariable(value = "id") int id, @RequestParam String title, @RequestParam String topic,
-                           @RequestParam String fullText) {
+                                 @RequestParam String fullText) {
         Post post = postRepository.findById(id).orElseThrow();
         post.setCreatedAt(Instant.now());
         post.setFullText(fullText);
@@ -93,5 +90,21 @@ public class BlogPageController {
         return "redirect:/blog";
     }
 
+    @GetMapping("/")
+    public String home(Model model) {
+        model.addAttribute("title", "Welcome to main page");
+        return "blog";
+    }
 
+    @GetMapping("/about")
+    public String about(Model model) {
+        model.addAttribute("title", "Page about Boris Pivovarov");
+        return "about";
+    }
+
+    @GetMapping("/auth")
+    public String auth(Model model) {
+        model.addAttribute("title", "Welcome to auth page");
+        return "blog";
+    }
 }

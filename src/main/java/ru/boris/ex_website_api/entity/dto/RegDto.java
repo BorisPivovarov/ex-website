@@ -1,4 +1,4 @@
-package ru.boris.ex_website_api.entity;
+package ru.boris.ex_website_api.entity.dto;
 
 import lombok.Data;
 
